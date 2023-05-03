@@ -1,40 +1,45 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import {NavigationContainer} from "@react-navigation/native";
+
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-      <View style={styles.container}>
-        <Text style={styles.red}>Welcome to</Text>
-        <Text style={styles.bigBlue}>SAAMMAN.COM</Text>
-        <Text style={[styles.bigBlue, styles.red]}>Developed by</Text>
-        <Text style={[styles.red]}>SHAKIL AHMAD KHAN</Text>
+      <NavigationContainer>
 
-        <View
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: 202,
-              backgroundColor: 'skyblue',
-            }}
-        />
+          <Stack.Navigator>
+              <Stack.Screen
+                  name="Home"
+                  component={HomeScreen}
+                  options={{title: 'Welcome'}}
+              />
+              <Stack.Screen name="Profile" component={ProfileScreen} />
+          </Stack.Navigator>
 
-      </View>
+          <View
+              style={[
+                  styles.container,
+                  {
+                      // Try setting `flexDirection` to `"row"`.
+                      flexDirection: 'column',
+                  },
+              ]}>
+              <View style={{flex: 2, backgroundColor: 'red'}} />
+              <View style={{flex: 2, backgroundColor: 'darkorange'}} />
+              <View style={{flex: 2, backgroundColor: 'green'}} />
+          </View>
+      </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  red: {
-    color: 'red'
-  },
-  bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
-  },
+    container: {
+        flex: 1,
+        padding: 0,
+    },
+
 });
